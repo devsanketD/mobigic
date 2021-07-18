@@ -82,7 +82,7 @@ class Uploads {
     async downloadFile(_id, code) {
         const result = await uploadsSchema.findOne({ _id, code })
         console.log(result)
-        if (result.code == code) {
+        if (result && result.code == code) {
             return {
                 success: true,
                 data: result,
