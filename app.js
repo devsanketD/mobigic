@@ -17,6 +17,9 @@ setDefaultMiddleware(APP)
 setUserroute(APP),
 setUploadFileRoute(APP)
 
+APP.use('/', express.static('upload'))
+
+
 //Server Start
 APP.listen(process.env.PORT, () => {
     console.log(`Server Started on port : ${process.env.PORT}`)

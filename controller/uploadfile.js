@@ -22,9 +22,9 @@ const uplaodfile = (req, res) => {
     upload(req, res, async () => {
         const { _id } = req.activeUser
         const { name } = req.body
-        const { filename } = req.file
+        const { originalname, filename } = req.file
         const code = Math.floor(100000 + Math.random() * 900000)
-        const response = await uploadServices.uploadfile({ name, filename, code, uploadedBy: mongoose.Types.ObjectId(_id) })
+        const response = await uploadServices.uploadfile({ name: originalname, filename, code, uploadedBy: mongoose.Types.ObjectId(_id) })
         res.status(response.statuscode).send(response)
     })
 }
