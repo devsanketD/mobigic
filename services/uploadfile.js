@@ -6,7 +6,7 @@ var DIR = process.env.DIR
 class Uploads {
     async uploadfile({ name, filename, code, uploadedBy }) {
         try {
-            await uploadsSchema.create({ name, filename, code, uploadedBy })
+            await uploadsSchema.create({ name, filename, link: `http://localhost:4200/showimage?link=http://localhost:4000/${filename}`, code, uploadedBy })
             return {
                 success: true,
                 msg: "File Uploaded Successfull",
@@ -29,8 +29,9 @@ class Uploads {
                         var obj = {
                             id: result[i]._id,
                             name: result[i].name,
-                            link: result[i].filename,
-                            code: result[i].code
+                            filename: result[i].filename,
+                            code: result[i].code,
+                            shareLink: result[i].link
                         }
                         finalarr.push(obj)
                         resolve(finalarr)
@@ -95,6 +96,25 @@ class Uploads {
                 statuscode: statusCode.INVALIDCRED
             }
 
+        }
+    }
+
+    async checkCode(filename, code) {
+        const result = await uploadsSchema.findOne({ filename, code })
+        console.log(result)
+        if (result && result.code == code) {
+            return {
+                success: true,
+                msg: {
+                    link: `http://localhost:4000/${result.filename}`,
+                    filename: result.name
+                },
+            }
+        } else {
+            return {
+                success: false,
+                msg: "Incorrect Secret Code",
+            }
         }
     }
 }

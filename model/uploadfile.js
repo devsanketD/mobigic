@@ -9,6 +9,7 @@ const uploadsSchema = new schema(
         code: { type: Number },
         filename: { type: String },
         uploadedBy: { type: schema.Types.ObjectId, ref: 'user' },
+        link: { type: String },
         createdAt: { type: Date, default: Date.now }
     }
 )

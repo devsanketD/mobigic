@@ -41,7 +41,7 @@ const deleteFiles = async (req, res) => {
     const { id } = req.params
     console.log("params id", id)
     const response = await uploadServices.deleteFile(id)
-    res.status(response.statuscode).send(response)
+    res.send(response)
 }
 
 //download uploaded file
@@ -50,9 +50,17 @@ const downloadFiles = async (req, res) => {
     const response = await uploadServices.downloadFile(id, code)
     res.status(response.statuscode).send(response)
 }
+
+const checkCode = async (req, res) => {
+    const { name, code  } = req.query
+    const response = await uploadServices.checkCode(name, code)
+    res.send(response)
+}
+
 module.exports = {
     uplaodfile,
     getAllUploadedFiles,
     deleteFiles,
-    downloadFiles
+    downloadFiles,
+    checkCode
 }

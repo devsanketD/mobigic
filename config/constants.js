@@ -11,10 +11,10 @@ module.exports = {
     statusCode: {
         SUCCESS: 200,
         NOTFOUND: 404,
-        USEREXISTS: 411,
-        USERNOTEXISTS: 412,
-        INVALIDCRED: 413,
-        TOKENEXPIRE: 414,
-        TOKENNOTFOUND: 415
+        USEREXISTS: 601,
+        USERNOTEXISTS: 602,
+        INVALIDCRED: 603,
+        TOKENEXPIRE: 604,
+        TOKENNOTFOUND: 605
     }
 }
